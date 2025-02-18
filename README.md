@@ -6,7 +6,8 @@ Large language models and diffusion models are used to generate and edit the roo
 
 Our training data is based on the [RPLAN dataset](http://staff.ustc.edu.cn/~fuxm/projects/DeepLayout/index.html) and we evaluate our method's performance using the [Tell2Design dataset](https://github.com/LengSicong/Tell2Design).
 
-The training data can be downloaded in <https://www.dropbox.com/scl/fi/efe1190upsbd8c6fly0bh/train_data.rar?rlkey=d88z1ffpao5kyxau7x26xbemi&st=wxi7watd&dl=0> and the test data (We use moonshot-v1-8k to preprocess the input texts in Tell2Design dataset) can be downloded in <https://www.dropbox.com/scl/fi/tmzc31d0799tdlet68hf8/kimi_test_data.rar?rlkey=ikdnk452hj7ozzrsfiovfa9wm&st=uyeffyqq&dl=0>
+The training data can be downloaded in <https://cloud.tsinghua.edu.cn/f/cda4cb89daef4da2b158/>
+ and the test data (We use moonshot-v1-8k to preprocess the input texts in Tell2Design dataset) can be downloded in <https://cloud.tsinghua.edu.cn/f/2844208e0c344d18bd72/>
 
 ## Quick start
 
@@ -19,7 +20,7 @@ We've implemented a UI for ChatHouseDiffusion and you can use it directly. (This
     ```
 
 2. Download the predict model and unzip it in `predict_model`.
-the model and parameters can be downloaded in <https://www.dropbox.com/scl/fi/xvcqof1r1uiy45ziwws8l/predict_model.rar?rlkey=aq2ibm1kw2d35i63olqj0dm4x&st=62pq13rv&dl=0>
+the model and parameters can be downloaded in <https://cloud.tsinghua.edu.cn/f/a01a8205be55462685fd/>
 
 3. Create `api_info.json` with your own api infomation in the root path. Any LLM using OpenAI package is supported, such as GPT4, Kimi, Ollama, etc.
 
