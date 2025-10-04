@@ -1,73 +1,176 @@
-# ChatHouseDiffusion
+# 辦公空間智能規劃平台
 
-Large language models and diffusion models are used to generate and edit the room plan with text prompts.
+基於 ChatHouseDiffusion 技術，為商用辦公空間設計的智能規劃與分析平台。
 
-## Data
+## 核心功能
 
-Our training data is based on the [RPLAN dataset](http://staff.ustc.edu.cn/~fuxm/projects/DeepLayout/index.html) and we evaluate our method's performance using the [Tell2Design dataset](https://github.com/LengSicong/Tell2Design).
+### 1. 平面圖智能分析
+- 上傳辦公空間平面圖
+- AI 自動辨識空間尺寸和結構
+- 計算可用面積
 
-The training data can be downloaded in <https://cloud.tsinghua.edu.cn/f/cda4cb89daef4da2b158/>
- and the test data (We use moonshot-v1-8k to preprocess the input texts in Tell2Design dataset) can be downloded in <https://cloud.tsinghua.edu.cn/f/2844208e0c344d18bd72/>
+### 2. 空間需求設定
+- 設定工作站數量
+- 設定會議室需求（小型/中型/大型）
+- 設定公共設施（茶水間、接待區、儲藏室等）
+- 實時預估所需面積
 
-## Quick start
+### 3. 智能配置方案
+- AI 生成多種配置方案
+- 可行性評分（0-100分）
+- 詳細的空間利用率分析
+- 智能建議和優化方向
 
-We've implemented a UI for ChatHouseDiffusion and you can use it directly. (This environment has been tested and works on Windows 10 with Python 3.10)
+### 4. 專案管理
+- 多專案管理
+- 版本歷史追蹤
+- 方案比較
 
-1. Install relative packages.
+## 技術架構
 
-    ```shell
-    pip install -r requirements
-    ```
+### 前端
+- **框架**: React 18 + TypeScript
+- **建置工具**: Vite
+- **路由**: React Router
+- **狀態管理**: React Context
 
-2. Download the predict model and unzip it in `predict_model`.
-the model and parameters can be downloaded in <https://cloud.tsinghua.edu.cn/f/a01a8205be55462685fd/>
+### 後端
+- **資料庫**: Supabase (PostgreSQL)
+- **認證**: Supabase Auth
+- **儲存**: Supabase Storage
+- **即時更新**: Supabase Realtime
 
-3. Create `api_info.json` with your own api infomation in the root path. Any LLM using OpenAI package is supported, such as GPT4, Kimi, Ollama, etc.
+### AI 引擎
+- 基於 ChatHouseDiffusion 的擴散模型
+- 空間配置演算法
+- 可行性評估系統
 
-    ```json
-    {
-    "api_key": "<your api_key>",
-    "base_url": "https://api.moonshot.cn/v1",
-    "model": "moonshot-v1-8k"
-    }
-    ```
+## 快速開始
 
-4. Run
+### 安裝依賴
 
-    ```shell
-    python ui.py
-    ```
-
-The demo is shown following:
-
-<img src="demo.gif" width="50%" alt="demo image">
-
-## Train and test
-
-You can read `train.py` and edit some parameters. Run `python train.py` for training a new model.
-
-You can read `test.py` and edit some parameters. Run `python test.py` for testing.
-
-You can read `predict.py` and change model, editing inject step or sampling timesteps for the ui.
-
-## Method
-
-Our code is based on [Imagen-pytorch](https://github.com/lucidrains/imagen-pytorch) and [Graphormer](https://github.com/microsoft/Graphormer).
-
-The specific method can be found in our paper.
-
-## Citation
-
-Please cite this paper if you use the code.
-
-```bib
-@misc{qin2024chathousediffusionpromptguidedgenerationediting,
-      title={ChatHouseDiffusion: Prompt-Guided Generation and Editing of Floor Plans}, 
-      author={Sizhong Qin and Chengyu He and Qiaoyun Chen and Sen Yang and Wenjie Liao and Yi Gu and Xinzheng Lu},
-      year={2024},
-      eprint={2410.11908},
-      archivePrefix={arXiv},
-      primaryClass={cs.HC},
-      url={https://arxiv.org/abs/2410.11908}, 
-}
+```bash
+npm install
 ```
+
+### 環境變數設定
+
+在 `.env` 檔案中設定 Supabase 連接資訊：
+
+```env
+VITE_SUPABASE_URL=your_supabase_url
+VITE_SUPABASE_ANON_KEY=your_supabase_anon_key
+```
+
+### 開發模式
+
+```bash
+npm run dev
+```
+
+### 建置生產版本
+
+```bash
+npm run build
+```
+
+## 使用流程
+
+### 1. 註冊/登入
+首次使用需要註冊帳號，之後可直接登入。
+
+### 2. 建立專案
+點擊「新增專案」，輸入專案名稱和描述。
+
+### 3. 上傳平面圖
+- 拖曳或點擊上傳平面圖檔案
+- 填寫平面圖名稱
+- 選填總面積（有助於更準確的分析）
+
+### 4. 設定空間需求
+- 工作站數量：每個約 6 m²
+- 會議室：
+  - 小型（4-6人）：約 15 m²
+  - 中型（8-10人）：約 25 m²
+  - 大型（12+人）：約 40 m²
+- 其他設施：電話亭、休息區、茶水間等
+
+系統會即時計算預估所需面積，並提示空間是否充足。
+
+### 5. 生成配置方案
+- 點擊「儲存需求並生成配置方案」
+- 系統會基於您的需求生成配置方案
+- 可以生成多個方案進行比較
+
+### 6. 查看分析結果
+每個方案包含：
+- **可行性評分**：0-100 分
+- **配置結果**：實際可容納的工位和設施數量
+- **空間利用率**：百分比顯示
+- **AI 建議**：優化方向和注意事項
+
+## 空間計算邏輯
+
+### 基礎面積需求
+- 工作站：6 m² / 個
+- 小型會議室：15 m² / 間
+- 中型會議室：25 m² / 間
+- 大型會議室：40 m² / 間
+- 電話亭：2 m² / 間
+- 休息區：20 m² / 個
+- 茶水間：15 m²
+- 接待區：20 m²
+- 儲藏室：10 m² / 間
+- 機房：15 m²
+
+### 循環空間加成
+系統會自動加上 40% 的循環空間（走道、公共區域等），以確保實際使用的舒適度。
+
+### 可行性評分標準
+- **95分**：可用面積 ≥ 需求面積 × 1.2（非常寬裕）
+- **85分**：可用面積 ≥ 需求面積 × 1.0（充足）
+- **70分**：可用面積 ≥ 需求面積 × 0.9（略緊湊）
+- **55分**：可用面積 ≥ 需求面積 × 0.8（緊湊）
+- **40分以下**：空間不足
+
+## 資料結構
+
+### 專案 (projects)
+- 專案名稱、描述、狀態
+- 關聯到使用者
+
+### 平面圖 (floor_plans)
+- 原始圖檔、處理後圖檔
+- 面積資訊、尺寸資訊
+- 關聯到專案
+
+### 空間需求 (space_requirements)
+- 各類空間的數量需求
+- 額外備註
+- 關聯到平面圖
+
+### 配置方案 (layout_solutions)
+- 可行性評分
+- 實際配置結果
+- 利用率、建議
+- 關聯到空間需求
+
+## 安全性
+
+- 所有資料表都啟用 Row Level Security (RLS)
+- 使用者只能存取自己的專案和資料
+- 平面圖檔案儲存在 Supabase Storage，有適當的存取控制
+
+## 未來規劃
+
+- [ ] 整合實際的 AI 平面圖生成模型
+- [ ] 3D 視覺化
+- [ ] 家具配置建議
+- [ ] 成本估算
+- [ ] 匯出功能（PDF、CAD）
+- [ ] 團隊協作功能
+- [ ] 模板庫
+
+## 授權
+
+基於 ChatHouseDiffusion 專案開發
